@@ -74,13 +74,37 @@ export default {
         date: '',
         press: '',
         cover: '',
-        bas: ''
+        bas: '',
+        category: ''
       }
+    },
+    onSubmit () {
+      this.$axios
+        .post('/books', {
+          id: this.form.id,
+          cover: this.form.cover,
+          title: this.form.title,
+          author: this.form.author,
+          date: this.form.date,
+          press: this.form.press,
+          abs: this.form.abs,
+          category: this.form.category
+        }).then(resp => {
+          if (resp && resp.status === 200) {
+            this.dialogFormVisible = false
+            this.$emit('onSubmit')
+          }
+        })
     }
   }
 }
 </script>
 
 <style scoped>
-
+  .el-icon-circle-plus-outline {
+    margin: 50px 0 0 20px;
+    font-size: 100px;
+    float: left;
+    cursor: pointer;
+  }
 </style>
